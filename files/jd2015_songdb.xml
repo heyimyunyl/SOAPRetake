@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <parsererror xmlns="http://www.w3.org/1999/xhtml" style="display: block; white-space: pre; border: 2px solid #c77; padding: 0 1em 0 1em; margin: 1em; background-color: #fdd; color: black">
+    <h3>This page contains the following errors:</h3>
+    <div style="font-family:monospace;font-size:12px">error on line 17 at column 1: Specification mandates value for attribute fba
+</div>
+    <h3>Below is a rendering of the page up to the first error.</h3>
+  </parsererror>
+  <soapenv:Body>
+    <ListContentSetsExResponse xmlns="urn:cas.wsapi.broadon.com">
+      <Version>2.0</Version>
+      <DeviceId>placeholder</DeviceId>
+      <MessageId>ECDK-4498122730-39653653300291095</MessageId>
+      <TimeStamp>placeholder</TimeStamp>
+      <ErrorCode>0</ErrorCode>
+      <ListResultTotalSize>1</ListResultTotalSize>
+      <Contents>
+        <TitleId>0001000573453345</TitleId>
+        <Contents>
+          <TitleIncluded>true</TitleIncluded>
+          <ContentIndex>2</ContentIndex>
+        </Contents>
+        <Attributes>
+          <Name>TitleVersion</Name>
+          <Value>2</Value>
+        </Attributes>
+        <Attributes>
+          <Name>NewSince</Name>
+          <Value>1413849600000</Value>
+        </Attributes>
+        <Attributes>
+          <Name>badge</Name>
+          <Value>3</Value>
+        </Attributes>
+        <Attributes>
+          <Name>avatarcount</Name>
+          <Value>0</Value>
+        </Attributes>
+        <Attributes>
+          <Name>thumbnail</Name>
+          <Value>https://vignette.wikia.nocookie.net/just-dance-spain/images/a/ae/Gangnamstyledlc.jpg</Value>
+        </Attributes>
+        <Attributes>
+          <Name>artist</Name>
+          <Value>PSY</Value>
+        </Attributes>
+        <Attributes>
+          <Name>videopreview</Name>
+          <Value>http://dl5.webmfiles.org/elephants-dream.webm</Value>
+        </Attributes>
+        <Attributes>
+          <Name>name</Name>
+          <Value>Gangnam Style</Value>
+        </Attributes>
+        <Attributes>
+          <Name>avatarpreview</Name>
+          <Value>https://vignette.wikia.nocookie.net/justdance/images/e/e1/Gangrena.png</Value>
+        </Attributes>
+        <Attributes>
+          <Name>song_order</Name>
+          <Value>1</Value>
+        </Attributes>
+        <Attributes>
+          <Name>longdesc</Name>
+          <Value>Written by Gun Hyung Yoo (KOMCA), Jai Sang Park. Published by Sony/ATV Music Publishing Canada (SOCAN) / Universal Music Publishing Group a division of Universal Music Canada Inc. All rights reserved. Used with permission. Courtesy of Universal Republic Records under license from Universal Music Enterprises
+</Value>
+        </Attributes>
+      </Contents>
+    </ListContentSetsExResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
