@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Body>
+		<PurchaseTitleResponse
+			xmlns="urn:ecs.wsapi.broadon.com">
+			<Version>2.0</Version>
+			<DeviceId>4498122730</DeviceId>
+			<MessageId>ECDK-4498122730-39653662161863209</MessageId>
+			<TimeStamp>1599409275135</TimeStamp>
+			<ErrorCode>0</ErrorCode>
+			<ServiceStandbyMode>false</ServiceStandbyMode>
+			<Balance>
+				<Amount>0</Amount>
+				<Currency>POINTS</Currency>
+			</Balance>
+			<TitleId>0001000573453345</TitleId>
+		</PurchaseTitleResponse>
+	</soapenv:Body>
+</soapenv:Envelope>

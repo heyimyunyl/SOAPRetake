@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Body>
+		<GetECConfigResponse xmlns="urn:ecs.wsapi.broadon.com">
+			<Version>2.0</Version>
+			<DeviceId>4498122730</DeviceId>
+			<MessageId>ECDK-4498122730-39653600512638909</MessageId>
+			<TimeStamp>1599408189821</TimeStamp>
+			<ErrorCode>0</ErrorCode>
+			<ServiceStandbyMode>false</ServiceStandbyMode>
+			<ContentPrefixURL>http://ccs.cdn.shop.wii.com/ccs/download</ContentPrefixURL>
+			<UncachedContentPrefixURL>https://ccs.shop.wii.com/ccs/download</UncachedContentPrefixURL>
+			<SystemContentPrefixURL>http://nus.cdn.shop.wii.com/ccs/download</SystemContentPrefixURL>
+			<SystemUncachedContentPrefixURL>https://ccs.shop.wii.com/ccs/download</SystemUncachedContentPrefixURL>
+			<EcsURL>https://jddlc7.glitch.me/ecs/services/ECommerceSOAP</EcsURL>
+			<IasURL>https://jddlc7.glitch.me/ias/services/IdentityAuthenticationSOAP</IasURL>
+			<CasURL>https://jddlc7.glitch.me/cas/services/CatalogingSOAP</CasURL>
+			<NusURL>https://jddlc7.glitch.me/nus/services/NetUpdateSOAP</NusURL>
+		</GetECConfigResponse>
+	</soapenv:Body>
+</soapenv:Envelope>
