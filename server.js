@@ -35,11 +35,56 @@ function currentEpoch() {
   return now
 }
 
+
+
+
 // Send the URL Catalog to the client
 app.post("/*/services/ECommerceSOAP", (req, res) => {
 
-  // getEcConfig 
-  if (req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:getecconfig"][0]) {
+  // CheckDeviceStatus 
+  if (req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:checkdevicestatus"][0]) {
+     
+  // Get user's information for customized XML
+  const deviceId = req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:checkdevicestatus"][0]["ecs:deviceid"][0]
+  // Get user's information for customized XML
+  const messageId = req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:checkdevicestatus"][0]["ecs:messageid"][0]
+  
+  // Read the XML
+  const xmlData = fs.readFileSync("./ecs/ecommercesoap/checkdevicestatus.xml", "utf8");
+
+  // Options for parsing the XML
+  const options = {
+    ignoreAttributes: false,
+    ignoreNameSpace: false,
+    parseNodeValue: true,
+    parseAttributeValue: true,
+    trimValues: true,
+  };
+
+    // Convert the XML to JSON
+    const tObj = xmlToJsonParser.getTraversalObj(xmlData, options);
+    const jsonObj = xmlToJsonParser.convertToJson(tObj, options);
+
+    // Change XML index depending on the user
+    jsonObj["soapenv:Envelope"]["soapenv:Body"]["CheckDeviceStatusResponse"]["MessageId"] = messageId
+    jsonObj["soapenv:Envelope"]["soapenv:Body"]["CheckDeviceStatusResponse"]["DeviceId"] = deviceId
+    jsonObj["soapenv:Envelope"]["soapenv:Body"]["CheckDeviceStatusResponse"]["TimeStamp"] = currentEpoch().toString()
+      
+    // Convert the JSON back to XML, credits to eol (https://stackoverflow.com/users/3761628/eol) for their help.
+    const JsonToXmlParser = require("fast-xml-parser").j2xParser;
+    const parser = new JsonToXmlParser({format: true, ignoreAttributes: false});
+    const xml = `<?xml version="1.0" encoding="utf-8"?>\n${parser.parse(jsonObj)}`;
+
+    // Set the response's type as application/xml
+    res.type('application/xml');
+    
+    // Sending the completely edited XML back to the user
+    res.send(xml)
+  }
+  
+  
+   // getEcConfig 
+  else if (req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:getecconfig"][0]) {
     
   // Get user's information for customized XML
   const deviceId = req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:getecconfig"][0]["ecs:deviceid"][0]
@@ -80,51 +125,17 @@ app.post("/*/services/ECommerceSOAP", (req, res) => {
   }
   
     
-  // CheckDeviceStatus 
-  else if (req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:checkdevicestatus"][0]) {
-     
-  // Get user's information for customized XML
-  const deviceId = req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:checkdevicestatus"][0]["ecs:deviceid"][0]
-  // Get user's information for customized XML
-  const messageId = req.body["soap-env:envelope"]["soap-env:body"][0]["ecs:checkdevicestatus"][0]["ecs:messageid"][0]
-  
-  // Read the XML
-  const xmlData = fs.readFileSync("./ecs/ecommercesoap/checkdevicestatus.xml", "utf8");
 
-  // Options for parsing the XML
-  const options = {
-    ignoreAttributes: false,
-    ignoreNameSpace: false,
-    parseNodeValue: true,
-    parseAttributeValue: true,
-    trimValues: true,
-};
-
-    // Convert the XML to JSON
-    const tObj = xmlToJsonParser.getTraversalObj(xmlData, options);
-    const jsonObj = xmlToJsonParser.convertToJson(tObj, options);
-
-    // Change XML index depending on the user
-    jsonObj["soapenv:Envelope"]["soapenv:Body"]["GetECConfigResponse"]["MessageId"] = messageId
-    jsonObj["soapenv:Envelope"]["soapenv:Body"]["GetECConfigResponse"]["DeviceId"] = deviceId
-    jsonObj["soapenv:Envelope"]["soapenv:Body"]["GetECConfigResponse"]["TimeStamp"] = currentEpoch().toString()
-      
-    // Convert the JSON back to XML, credits to eol (https://stackoverflow.com/users/3761628/eol) for their help.
-    const JsonToXmlParser = require("fast-xml-parser").j2xParser;
-    const parser = new JsonToXmlParser({format: true, ignoreAttributes: false});
-    const xml = `<?xml version="1.0" encoding="utf-8"?>\n${parser.parse(jsonObj)}`;
-
-    // Set the response's type as application/xml
-    res.type('application/xml');
-    
-    // Sending the completely edited XML back to the user
-    res.send(xml)
-  }
-  
   // If no body is given, send 403
   else {
   res.sendStatus(403)
-}});
+  }
+});
+
+
+
+
+
 
 // Send the GetChallenge to the client
 app.post("/*/services/IdentityAuthenticationSOAP", (req, res) => {
@@ -199,6 +210,10 @@ app.post("/*/services/IdentityAuthenticationSOAP", (req, res) => {
 }
 });
 
+
+
+
+
 // Send the SongDB (Catalog) to the client
 app.post("/*/services/CatalogingSOAP", (req, res) => {
   
@@ -239,9 +254,15 @@ app.post("/*/services/CatalogingSOAP", (req, res) => {
   res.sendStatus(403)
 }});
 
+
+
+
 app.get("/*", (req, res) => {
   res.sendStatus(403)
 });
+
+
+
 
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
